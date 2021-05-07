@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+	<title>myWeb</title>
+  
+	<meta charset="utf-8">
+  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+
+	<nav class="navbar navbar-inverse">
+  
+		<div class="container-fluid">
+    
+			<div class="navbar-header">
+      
+				<a class="navbar-brand" href="#">myWeb</a>
+    
+			</div>
+    
+			<ul class="nav navbar-nav">
+      
+				<li class="active"><a href="#">Home</a></li>
+      
+				<li class="active"><a href="#">About</a></li>
+    
+			</ul>
+    
+			<ul class="nav navbar-nav navbar-right">
+      
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    
+			</ul>
+  
+		</div>
+
+	</nav>
+
+
+	<div class="container form" >
+
+        
+		<form method="POST" action="/home">
+          
+			<div class="mb-3">
+            
+				<label for="exampleInputEmail1" class="form-label">Search</label>
+            
+				<input type="text" class="form-control" name="search" placeholder="search here">
+
+            
+				<div style="display: flex; justify-content: flex-start">
+                
+					<input type="text" class="form-control dropdown" name="min" placeholder="20">
+                
+					<input type="text" class="form-control dropdown" name="max" placeholder="2000">
+            
+				</div>
+             
+				<label for="sort">sorted price</label>
+                
+				<select name="sort" id="sort" class="dropdown">
+		  
+					<option name="ascending" value="ascending">Default</option>
+                  
+					<option name="ascending" value="ascending">Ascending</option>
+                  
+					<option name="descending" value="descending">Descending</option>
+                
+				</select>
+
+            
+				<label for="currency">currency</label>
+                
+				<select name="currency" id="currency" class="dropdown">
+                  
+					<option name="usd" value="usd">usd</option>
+                  
+					<option name="azn" value="azn">azn</option>
+		  
+					<option name="azn" value="rub">rub</option>
+                
+				</select>
+          
+			</div>
+
+
+	    
+			<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                
+				<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" name="amazon">
+                
+				<label class="btn btn-outline-primary" for="btncheck1">amazon.com</label>
+
+                
+				<input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off" name="tapaz">
+                
+				<label class="btn btn-outline-primary" for="btncheck3">tap.az</label>
+            
+			</div>
+            
+			<div>
+                
+				<button style="margin-top: 15px" type="submit" class="btn btn-primary">Search</button>
+            
+			</div>
+        
+		</form>
+    
+	</div>
+
+    
+	<div class="flex-container">
+        
+		<div class="container form flex-child">
+            
+			<h3 class="text-center">amazon.com</h3>
+            
+			{% for data in amazon_products %}
+                
+			<div class="search">
+                    
+				<h4><a class="link" target='_blank' href={{ data.get('link') }}>{{ data.get('title') }}</a></h4>
+                    
+				<h5 class="float-left font-weight-bold price-title">Price: {{ data.get('price') }}</h5>
+                    
+				<h5 class="float-right rating-title">Rating: {{ data.get('rating') }}</h5>
+                    
+				<h6>Source: {{ data.get('source') }}</h6>
+                
+			</div>
+            
+			{% else %}
+                
+			<div></div>
+            
+			{% endfor %}
+        
+		</div>
+
+
+        
+		<div class="container form flex-child">
+            
+			<h3 class="text-center">tap.az</h3>
+            
+			{% for data in tapaz_products %}
+                
+			<div class="search">
+                    
+				<h4><a class="link" target='_blank' href={{ data.get('link') }}>{{ data.get('title') }}</a></h4>
+                    
+				<h5 class="float-left font-weight-bold price-title">Price: {{ data.get('price') }}</h5>
+                    
+				<h6>Source: {{ data.get('source') }}</h6>
+                
+			</div>
+            
+			{% else %}
+                
+			<div></div>
+            
+			{% endfor %}
+        
+		</div>
+
+    
+	</div>
+
+
+</body>
+
+</html>
+
+
+
